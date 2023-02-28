@@ -45,18 +45,18 @@
           </a>
           <i class="is-flex is-flex--center fa-regular fa-circle-user mr-8"></i>
           <div class="is-flex is-flex--center mr-8">
-            <a href="">Đăng nhập</a>
+            <a href="/login">Đăng nhập</a>
             /
-            <a href="">Đăng ký</a>
+            <a href="/signup">Đăng ký</a>
           </div>
         </div>
       </div>
     </div>
     <div class="topbar--body is-flex is-flex--center shadow">
-      <a href="">
+      <a href="/home">
         <img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/213325254/original/4802c9fa2c952a807666ef2e88b3c24ac82ae36e/design-a-minimalist-logo-for-your-climbing-gear-shop.jpg" alt="">
       </a>
-      <a-button class="cate is-flex is-flex--center mr-16" style="position:relative">
+      <a-button class="cate is-flex is-flex--center mr-16" style="position:relative" @click="clickMenu">
         <i class="fa-solid fa-list mr-8"></i>
         DANH MỤC
       </a-button>
@@ -85,7 +85,7 @@
           <span style="color:#000; font-size:12px;font-weight: bold">Giỏ hàng</span>
       </a-button>
       
-      <div class="menu-list shadow">
+      <div class="menu-list shadow" v-if="showMenu">
         <a href="">
           <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
             <div class="is-flex">
@@ -184,11 +184,47 @@
 </template>
 
 <script>
+import { get } from 'lodash'
+
 export default {
   name: 'Topbar',
   data() {
     return {
       hoverMenu: false,
+      showMenu: false,
+      allowClickMenu: true
+    }
+  },
+  created() {
+    if (this.path == '/') {
+      this.showMenu = true
+      this.allowClickMenu = false
+    }
+  },
+  watch: {
+    path(value) {
+      if (!value) return
+      if (value == '/' || value == '/home') {
+        this.showMenu = true
+        this.allowClickMenu = false
+      }
+    }
+  },
+  computed: {
+    route() {
+      return get(this.$router, ['currentRoute', 'value'], {})
+    },
+    path() {
+      return this.route.fullPath
+    }
+  },
+  methods: {
+    clickMenu() {
+      if (!this.allowClickMenu) return
+      this.showMenu = !this.showMenu
+    },
+    toggleMenu() {
+      this.showMenu = false
     }
   }
 }
