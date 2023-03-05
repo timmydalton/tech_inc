@@ -22,6 +22,7 @@ Route::get('/user/all', function() {
 });
 
 Route::prefix('account')->group(function() {
+  Route::get('/login_token', [AccountController::class, 'get_account_by_token']);
   Route::post('/create', [AccountController::class, 'create_account']);
   Route::post('/login', [AccountController::class, 'handle_login']);
 });

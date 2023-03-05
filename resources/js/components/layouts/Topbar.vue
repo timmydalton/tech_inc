@@ -44,11 +44,29 @@
             Tin tức
           </a>
           <i class="is-flex is-flex--center fa-regular fa-circle-user mr-8"></i>
-          <div class="is-flex is-flex--center mr-8">
+          <div class="is-flex is-flex--center mr-8" v-if="!account">
             <a href="/login">Đăng nhập</a>
             /
             <a href="/signup">Đăng ký</a>
           </div>
+          <template v-else>
+            <a-popover trigger='hover' placement="bottomRight" overlayClassName="custom-overlay">
+              <template #content>
+                <a-menu :selected="[]">
+                  <a-menu-item key="1" @click="e => handleClick('profile')">
+                    <a>Trang cá nhân</a>
+                  </a-menu-item>
+                  <a-menu-divider/>
+                  <a-menu-item key="2" @click="e => handleClick('logout')">
+                    <a>Đăng xuất</a>
+                  </a-menu-item>
+                </a-menu>
+              </template>
+              <div class="is-flex is-flex--center mr-8" style="cursor: pointer">
+                {{ account.name || account.username }}
+              </div>
+            </a-popover>
+          </template>
         </div>
       </div>
     </div>
@@ -185,6 +203,7 @@
 
 <script>
 import { get } from 'lodash'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Topbar',
@@ -214,6 +233,9 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      account: state => state.account.data
+    }),
     route() {
       return get(this.$router, ['currentRoute', 'value'], {})
     },
@@ -228,6 +250,20 @@ export default {
     },
     toggleMenu() {
       this.showMenu = false
+    },
+    handleClick(state) {
+      switch (state) {
+        case 'logout': {
+          this.$store.commit('account/set-account', null)
+          document.cookie = 'Token=; Max-Age=-99999999;';
+          this.$router.go()
+          break
+        }
+        case 'profile': {
+          this.$router.push('profile')
+          break
+        }
+      }
     }
   }
 }

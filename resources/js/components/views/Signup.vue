@@ -226,7 +226,7 @@ export default {
     city: '',
     visibleAlert: false,
     alert: '',
-    alertType: ''
+    alertType: 'error'
     }
   },
   methods: {
@@ -237,7 +237,7 @@ export default {
       this.city = e.target.value
     },
     clickSignup() {
-      const url = `${import.meta.env.VITE_APP_API_URL}/account/create`
+
       if (!this.password || !this.username || !this.address || !this.phone) {
         this.showAlert('Bạn chưa nhập đủ thông tin!!!', 'error')
         return
@@ -257,6 +257,7 @@ export default {
           name: this.name
         })
       }
+      const url = `${import.meta.env.VITE_APP_API_URL}/account/create`
       axios.post(url, param)
         .then(res => {
           if (res.status == 200) {
