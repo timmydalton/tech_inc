@@ -11,7 +11,7 @@ import { createApp } from 'vue'
 import store from './stores/store'
 import routers from './routers/routers';
 
-import { Button, Input, Carousel } from 'ant-design-vue'
+import { Button, Input, Carousel, Alert } from 'ant-design-vue'
 
 const app = createApp(App)
 
@@ -22,5 +22,6 @@ app.component(Button.name, Button)
 
 app.use(Input)
 app.use(Carousel)
+app.component(Alert.name, Alert)
 
 app.mount('#app')

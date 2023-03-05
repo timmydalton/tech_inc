@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AccountController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,10 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/user/all', function() {
+  $user = DB::table('users')->select('id', 'name', 'email') -> get();
+  return Response::json($user, 200);
 });
 
-Route::get('/hello', function() {
-    echo 'Xin chao cac ban';
+Route::prefix('account')->group(function() {
+  Route::post('/create', [AccountController::class, 'create_account']);
+  Route::post('/login', [AccountController::class, 'handle_login']);
 });
+
+Route::fallback(function(){
+  return response()->json([
+    'message' => 'Page Not Found.'], 404);
+})->where('any', '.*');

@@ -84,7 +84,7 @@
           <i class="fa-solid fa-cart-shopping mr-8" style="font-size: 24px"></i>
           <span style="color:#000; font-size:12px;font-weight: bold">Giỏ hàng</span>
       </a-button>
-      
+
       <div class="menu-list shadow" v-if="showMenu">
         <a href="">
           <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
@@ -207,6 +207,9 @@ export default {
       if (value == '/' || value == '/home') {
         this.showMenu = true
         this.allowClickMenu = false
+      } else {
+        this.showMenu = false
+        this.allowClickMenu = true
       }
     }
   },
