@@ -11,7 +11,7 @@ import { createApp } from 'vue'
 import store from './stores/store'
 import routers from './routers/routers';
 
-import { Button, Input, Carousel, Alert, Popover, Menu, MenuDivider, MenuItem } from 'ant-design-vue'
+import { Button, Input, Carousel, Alert, Popover, Menu, MenuDivider, SubMenu, MenuItem, MenuItemGroup } from 'ant-design-vue'
 
 const app = createApp(App)
 
@@ -27,5 +27,7 @@ app.component(Popover.name, Popover)
 app.component(Menu.name, Menu)
 app.component(MenuItem.name, MenuItem)
 app.component(MenuDivider.name, MenuDivider)
+app.component(SubMenu.name, SubMenu)
+app.component(MenuItemGroup.name, MenuItemGroup)
 
 app.mount('#app')

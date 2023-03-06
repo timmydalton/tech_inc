@@ -8,82 +8,6 @@ use App\Models\Accounts;
 
 class AccountController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function create_account(Request $request) {
       $params = $request->all();
       $username = $params['username'] ?? null;
@@ -138,6 +62,21 @@ class AccountController extends Controller
         ])->first();
         if (!isset($user)) return response()->json(['message' => 'invalid token'], 401);
         $user->makehidden('password');
+        return response()->json(['message' => 'ok', 'data' => $user], 200);
+      } else return response()->json(['message' => 'missing params'], 500);
+    }
+
+    public function update_info(Request $request) {
+      $params = $request->all();
+      $token = $request->token;
+      $info = $request->info;
+      if (isset($token)) {
+        $user = Accounts::where([
+          ['token', '=', $token]
+        ])->first();
+        if (!isset($user)) return response()->json(['message' => 'invalid token'], 401);
+        $user->info = $info;
+        $user->save();
         return response()->json(['message' => 'ok', 'data' => $user], 200);
       } else return response()->json(['message' => 'missing params'], 500);
     }

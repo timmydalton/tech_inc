@@ -56,8 +56,11 @@
                   <a-menu-item key="1" @click="e => handleClick('profile')">
                     <a>Trang cá nhân</a>
                   </a-menu-item>
+                  <a-menu-item key="2" v-if="account.role == 0" @click="e => handleClick('admin')">
+                    <a>Chỉnh sửa cửa hàng</a>
+                  </a-menu-item>
                   <a-menu-divider/>
-                  <a-menu-item key="2" @click="e => handleClick('logout')">
+                  <a-menu-item key="3" @click="e => handleClick('logout')">
                     <a>Đăng xuất</a>
                   </a-menu-item>
                 </a-menu>
@@ -104,88 +107,88 @@
       </a-button>
 
       <div class="menu-list shadow" v-if="showMenu">
-        <a href="">
-          <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
+        <a @dblclick="dblClick('mouse_pad')">
+          <div :class="{'menu-item': true, 'selected': viewCate == 'mouse_pad'}" @click="clickCate('mouse_pad')">
             <div class="is-flex">
               <i class="fa-regular fa-keyboard mr-16" style="font-size:24px"></i>
               LÓT CHUỘT
             </div>
           </div>
         </a>
-        <a href="">
-          <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
+        <a @dblclick="dblClick('gaming_gear')">
+          <div :class="{'menu-item': true, 'selected': viewCate == 'gaming_gear'}" @click="clickCate('gaming_gear')">
             <div class="is-flex">
               <i class="fa-solid fa-gamepad mr-16" style="font-size:24px"></i>
               GAMING GEAR
             </div>
           </div>
         </a>
-        <a href="">
-          <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
+        <a @dblclick="dblClick('computer_accessories')">
+          <div :class="{'menu-item': true, 'selected': viewCate == 'computer_accessories'}" @click="clickCate('computer_accessories')">
             <div class="is-flex">
               <i class="fa-solid fa-display mr-16" style="font-size:24px"></i>
               PHỤ KIỆN MÁY TÍNH
             </div>
           </div>
         </a>
-        <a href="">
-          <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
+        <a @dblclick="dblClick('figure')">
+          <div :class="{'menu-item': true, 'selected': viewCate == 'figure'}" @click="clickCate('figure')">
             <div class="is-flex">
               <i class="fa-solid fa-box-open mr-16" style="font-size:24px"></i>
               MÔ HÌNH
             </div>
           </div>
         </a>
-        <a href="">
-          <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
+        <a @dblclick="dblClick('decors')">
+          <div :class="{'menu-item': true, 'selected': viewCate == 'decors'}" @click="clickCate('decors')">
             <div class="is-flex">
               <i class="fa-solid fa-frog mr-16" style="font-size:24px"></i>
               PHỤ KIỆN TRANG TRÍ
             </div>
           </div>
         </a>
-        <a href="">
-          <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
+        <a @dblclick="dblClick('speaker_micro_webcam')">
+          <div :class="{'menu-item': true, 'selected': viewCate == 'speaker_micro_webcam'}" @click="clickCate('speaker_micro_webcam')">
             <div class="is-flex">
               <i class="fa-solid fa-microphone mr-16" style="font-size:24px"></i>
               LOA, MICRO, WEBCAM
             </div>
           </div>
         </a>
-        <a href="">
-          <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
+        <a @dblclick="dblClick('gaming_chair')">
+          <div :class="{'menu-item': true, 'selected': viewCate == 'gaming_chair'}" @click="clickCate('gaming_chair')">
             <div class="is-flex">
               <i class="fa-solid fa-chair mr-16" style="font-size:24px"></i>
               GHẾ GAMING
             </div>
           </div>
         </a>
-        <a href="">
-          <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
+        <a @dblclick="dblClick('gaming_table')">
+          <div :class="{'menu-item': true, 'selected': viewCate == 'gaming_table'}" @click="clickCate('gaming_table')">
             <div class="is-flex">
               <i class="fa-solid fa-stapler mr-16" style="font-size:24px"></i>
               BÀN GAMING
             </div>
           </div>
         </a>
-        <a href="">
-          <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
+        <a @dblclick="dblClick('usb_devices')">
+          <div :class="{'menu-item': true, 'selected': viewCate == 'usb_devices'}" @click="clickCate('usb_devices')">
             <div class="is-flex">
               <i class="fa-brands fa-usb mr-16" style="font-size:24px"></i>
               USB, BỘ CHIA TÍN HIỆU
             </div>
           </div>
         </a>
-        <a href="">
-          <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
+        <a @dblclick="dblClick('fan_cooler')">
+          <div :class="{'menu-item': true, 'selected': viewCate == 'fan_cooler'}" @click="clickCate('fan_cooler')">
             <div class="is-flex">
               <i class="fa-solid fa-fan mr-16" style="font-size:24px"></i>
               TẢN NHIỆT, COOLING
             </div>
           </div>
         </a>
-        <a href="">
-          <div class="menu-item" @mouseenter="hoverMenu = true" @mouseleave="hoverMenu = false">
+        <a @dblclick="dblClick('phone_accessories')">
+          <div :class="{'menu-item': true, 'selected': viewCate == 'phone_accessories'}" @click="clickCate('phone_accessories')">
             <div class="is-flex">
               <i class="fa-solid fa-mobile-screen-button mr-16" style="font-size:24px"></i>
               PHỤ KIỆN ĐIỆN THOẠI
@@ -194,8 +197,10 @@
         </a>
       </div>
 
-      <div class="menu-expand shadow" v-show="hoverMenu">
-
+      <div class="menu-expand shadow header-menu-group" v-show="hoverMenu">
+        <div class="sub-item" :key="cat.id" v-for="cat in cate.filter(el => el.product_type.key == viewCate)">
+          <a :href="'/categories/' + cat.key" class="cat-2">{{ cat.name.toUpperCase() }}</a>
+        </div>
       </div>
     </div>
   </div>
@@ -211,7 +216,8 @@ export default {
     return {
       hoverMenu: false,
       showMenu: false,
-      allowClickMenu: true
+      allowClickMenu: true,
+      viewCate: ''
     }
   },
   created() {
@@ -234,13 +240,21 @@ export default {
   },
   computed: {
     ...mapState({
-      account: state => state.account.data
+      account: state => state.account.data,
+      categories: state => state.categories.categories,
+      productType: state => state.categories.productType
     }),
     route() {
       return get(this.$router, ['currentRoute', 'value'], {})
     },
     path() {
       return this.route.fullPath
+    },
+    cate() {
+      return this.categories.map(cate => {
+        cate.product_type = this.productType.find(pt => pt.id == cate.product_type_id)
+        return cate
+      })
     }
   },
   methods: {
@@ -264,6 +278,18 @@ export default {
           break
         }
       }
+    },
+    clickCate(cate) {
+      if (this.viewCate == cate) {
+        this.viewCate = ''
+        this.hoverMenu = false
+      } else {
+        this.viewCate = cate
+        this.hoverMenu = true
+      }
+    },
+    dblClick(type) {
+      this.$router.push('/product-type/' + type)
     }
   }
 }

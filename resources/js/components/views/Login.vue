@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white p-3">
+  <div class="bg-white p-3" style="margin-top: 16px">
     <div class="container">
         <div class="row login-page">
             <div class="col-6">

@@ -10,7 +10,7 @@
 import Topbar from './Topbar.vue'
 import Footer from './Footer.vue'
 import axios from 'axios'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'App',
@@ -33,6 +33,8 @@ export default {
           document.cookie = 'Token=; Max-Age=-99999999;';
         })
     }
+
+    this.fetchCategories()
   },
   computed: {
     ...mapState({
@@ -40,6 +42,9 @@ export default {
     })
   },
   methods: {
+    ...mapActions({
+      fetchCategories: "categories/fetch-data"
+    }),
     getCookie(cookieName) {
       let cookie = {};
       document.cookie.split(';').forEach(function(el) {

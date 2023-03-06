@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,10 @@ Route::prefix('account')->group(function() {
   Route::get('/login_token', [AccountController::class, 'get_account_by_token']);
   Route::post('/create', [AccountController::class, 'create_account']);
   Route::post('/login', [AccountController::class, 'handle_login']);
+  Route::post('/update_info', [AccountController::class, 'update_info']);
+});
+Route::prefix('categories')->group(function() {
+  Route::get('/all', [CategoriesController::class, 'get_all']);
 });
 
 Route::fallback(function(){

@@ -1,5 +1,4 @@
 .topbar
-  margin-bottom: 16px
   &--first
     background-color: var(--color-primary)
     height: 36px
@@ -85,7 +84,7 @@
           font-size: 13px
           .mr-16
             width: 28px
-          &:hover
+          &:hover, &.selected
             background-color: var(--color-primary)
             color: #fff
     .menu-expand
@@ -98,6 +97,7 @@
       background-color: #fff
       border-radius: 16px
       z-index: 2
+      padding: 15px
 
 .custom-overlay, .ant-popover-inner-content
   padding: 0
