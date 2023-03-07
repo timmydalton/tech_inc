@@ -11,7 +11,7 @@ import { createApp } from 'vue'
 import store from './stores/store'
 import routers from './routers/routers';
 
-import { Button, Input, Carousel, Alert, Popover, Menu, MenuDivider, SubMenu, MenuItem, MenuItemGroup, Table } from 'ant-design-vue'
+import { Button, Input, Carousel, Alert, Popover, Menu, MenuDivider, SubMenu, MenuItem, MenuItemGroup, Table, Dropdown, Modal, Select, SelectOption, Upload } from 'ant-design-vue'
 
 const app = createApp(App)
 
@@ -30,5 +30,10 @@ app.component(MenuDivider.name, MenuDivider)
 app.component(SubMenu.name, SubMenu)
 app.component(MenuItemGroup.name, MenuItemGroup)
 app.component(Table.name, Table)
+app.component(Dropdown.name, Dropdown)
+app.component(Modal.name, Modal)
+app.component(Select.name, Select)
+app.component(Upload.name, Upload)
+app.use(SelectOption)
 
 app.mount('#app')

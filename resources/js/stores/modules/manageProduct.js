@@ -12,19 +12,15 @@ const manageProductModule = {
   },
   actions: {
     'fetch-product': ({state}, payload) => {
-      const { token } = payload
-      const url = `${import.meta.env.VITE_APP_API_URL}/account/login_token?token=${token}`
+      const url = `${import.meta.env.VITE_APP_API_URL}/product/all`
       axios.get(url, {headers: {"Accept":"application/json"}})
         .then(res => {
-        if (res.status == 200) {
-          const user = res.data.data
-          state.data = user
-          if (user) state.data.info = JSON.parse(user.info)
-        }
+          if (res.status == 200) {
+            state.data = res.data.data
+          }
         })
         .catch(err => {
-        console.log(err, 'token failed')
-        document.cookie = 'Token=; Max-Age=-99999999;';
+          console.log(err, 'request failed')
         })
     }
   }

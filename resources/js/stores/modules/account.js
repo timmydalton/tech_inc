@@ -24,8 +24,8 @@ const accountModule = {
         }
         })
         .catch(err => {
-        console.log(err, 'token failed')
-        document.cookie = 'Token=; Max-Age=-99999999;';
+          console.log(err, 'token failed')
+          document.cookie = 'Token=; Max-Age=-99999999;';
         })
     }
   }

@@ -4,7 +4,8 @@ const categoriesModule = {
   namespaced: true,
   state: () => ({
     categories: [],
-    productType: []
+    productType: [],
+    mapType: {}
   }),
   actions: {
     'fetch-data': ({state}, payload) => {
@@ -14,6 +15,9 @@ const categoriesModule = {
           if (res.status == 200) {
             state.categories = res.data.data.categories
             state.productType = res.data.data.product_type
+            res.data.data.product_type.forEach(el => {
+              state.mapType[el.id] = el.name
+            });
           }
         })
         .catch(err => {

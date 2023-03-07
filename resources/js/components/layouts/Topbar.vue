@@ -260,6 +260,8 @@ export default {
   methods: {
     clickMenu() {
       if (!this.allowClickMenu) return
+      this.viewCate = ''
+      this.hoverMenu = false
       this.showMenu = !this.showMenu
     },
     toggleMenu() {

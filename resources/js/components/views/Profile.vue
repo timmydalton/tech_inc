@@ -14,6 +14,7 @@
             <a-menu-item-group key="g2" title="Admin" v-if="userRole == 0">
               <a-menu-item key="4">Check đơn</a-menu-item>
               <a-menu-item key="5">Quản lý sản phẩm</a-menu-item>
+              <a-menu-item key="6">Quản lý mẫu mã</a-menu-item>
             </a-menu-item-group>
           </a-menu>
         </div>
@@ -33,6 +34,9 @@
           <template v-if="selectedKeys == '5'">
             <ManageProduct :selectedKeys="selectedKeys"/>
           </template>
+          <template v-if="selectedKeys == '6'">
+            <ManageVariations :selectedKeys="selectedKeys"/>
+          </template>
         </div>
       </div>
     </div>
@@ -46,6 +50,7 @@ import axios from 'axios'
 import AccountInfo from '../manage/AccountInfo.vue'
 import ChangePassword from '../manage/ChangePassword.vue'
 import ManageProduct from '../manage/ManageProduct.vue'
+import ManageVariations from '../manage/ManageVariations.vue'
 
 export default {
   name: 'Profile',
@@ -57,7 +62,8 @@ export default {
   components: {
     AccountInfo,
     ChangePassword,
-    ManageProduct
+    ManageProduct,
+    ManageVariations
   },
   created() {
     if (this.$route && this.$route.query.key) {
