@@ -277,6 +277,10 @@ export default {
           this.$router.push('profile')
           break
         }
+        case 'admin': {
+          this.$router.push('profile?key=4')
+          break
+        }
       }
     },
     clickCate(cate) {

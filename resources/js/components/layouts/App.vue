@@ -21,17 +21,7 @@ export default {
   mounted() {
     const token = this.getCookie('Token')
     if (token) {
-      const url = `${import.meta.env.VITE_APP_API_URL}/account/login_token?token=${token}`
-      axios.get(url, {headers: {"Accept":"application/json"}})
-        .then(res => {
-          if (res.status == 200) {
-            this.$store.commit('account/set-account', res.data.data)
-          }
-        })
-        .catch(err => {
-          console.log(err, 'token failed')
-          document.cookie = 'Token=; Max-Age=-99999999;';
-        })
+      this.fetchAccount({token: token})
     }
 
     this.fetchCategories()
@@ -43,7 +33,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchCategories: "categories/fetch-data"
+      fetchCategories: "categories/fetch-data",
+      fetchAccount: "account/fetch-account"
     }),
     getCookie(cookieName) {
       let cookie = {};

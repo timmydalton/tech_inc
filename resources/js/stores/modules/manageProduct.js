@@ -1,18 +1,17 @@
 import axios from "axios";
 
-const accountModule = {
+const manageProductModule = {
   namespaced: true,
   state: () => ({
     data: null,
   }),
   mutations: {
-    'set-account': (state, payload) => {
+    'set-data': (state, payload) => {
       state.data = payload
-      if (payload) state.data.info = JSON.parse(payload.info)
     }
   },
   actions: {
-    'fetch-account': ({state}, payload) => {
+    'fetch-product': ({state}, payload) => {
       const { token } = payload
       const url = `${import.meta.env.VITE_APP_API_URL}/account/login_token?token=${token}`
       axios.get(url, {headers: {"Accept":"application/json"}})
@@ -31,4 +30,4 @@ const accountModule = {
   }
 }
 
-export default accountModule
+export default manageProductModule

@@ -27,6 +27,7 @@ Route::prefix('account')->group(function() {
   Route::post('/create', [AccountController::class, 'create_account']);
   Route::post('/login', [AccountController::class, 'handle_login']);
   Route::post('/update_info', [AccountController::class, 'update_info']);
+  Route::post('/change_password', [AccountController::class, 'change_password']);
 });
 Route::prefix('categories')->group(function() {
   Route::get('/all', [CategoriesController::class, 'get_all']);

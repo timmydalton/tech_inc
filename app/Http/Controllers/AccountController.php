@@ -80,4 +80,24 @@ class AccountController extends Controller
         return response()->json(['message' => 'ok', 'data' => $user], 200);
       } else return response()->json(['message' => 'missing params'], 500);
     }
+
+    public function change_password(Request $request) {
+      $params = $request->all();
+      $token = $request->token;
+      $username = $request->username;
+      $pass = $request->pass;
+      $oldPass = $request->oldPass;
+      if (isset($token) && isset($pass) && isset($oldPass) && isset($username)) {
+        $user = Accounts::where([
+          ['token', '=', $token],
+          ['username', '=', $username],
+          ['password', '=', $oldPass],
+        ])->first();
+        if (!isset($user)) return response()->json(['message' => 'invalid failed'], 401);
+        $user->password = $pass;
+        $user->save();
+        $user->makehidden('password');
+        return response()->json(['message' => 'ok', 'data' => $user], 200);
+      } else return response()->json(['message' => 'missing params'], 500);
+    }
 }
