@@ -67,4 +67,23 @@ class ProductController extends Controller
         ])->first();
         return response()->json(['message' => 'ok', 'data' => $product], 200);
     }
+
+    public function get_by_type_id(Request $request) {
+        $type_id = $request->type_id;
+        $page = 1;
+        $limit = 12;
+        if (isset($request->page)) $page = $request->page;
+        if (isset($request->limit)) $limit = $request->limit;
+        if (!isset($type_id)) return response()->json(['message' => 'missing params'], 500);
+        $products = Products::where([
+            ['is_deleted', '=', '0'],
+            ['product_type_id', '=', $type_id]
+        ])->get();
+        $pagination = [];
+        $pagination['page'] = $page;
+        $pagination['limit'] = $limit;
+        $pagination['count'] = $products->count();
+        $products = $products->slice(($page-1)*$limit, $page*$limit);
+        return response()->json(['message' => 'ok', 'data' => $products, 'pagination' => $pagination], 200);
+    }
 }

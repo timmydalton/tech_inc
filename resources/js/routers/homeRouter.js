@@ -3,6 +3,7 @@ import NotFound from '../components/views/NotFound.vue'
 import Login from '../components/views/Login.vue'
 import Signup from '../components/views/Signup.vue'
 import Profile from '../components/views/Profile.vue'
+import ProductType from '../components/views/ProductType.vue'
 
 const homeRouter = [
   {
@@ -26,10 +27,15 @@ const homeRouter = [
     name: 'Profile'
   },
   {
+    path: '/product-type/:type',
+    component: ProductType,
+    name: "ProductType"
+  },
+  {
     path: '/:catchAll(.*)',
     component: Home,
     name: 'Home'
-  }
+  },
 ];
 
 export default homeRouter;

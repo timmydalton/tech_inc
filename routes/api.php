@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\VariationController;
+use App\Http\Controllers\ProductTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,12 +34,16 @@ Route::prefix('account')->group(function() {
 Route::prefix('categories')->group(function() {
   Route::get('/all', [CategoriesController::class, 'get_all']);
 });
+Route::prefix('product_type')->group(function() {
+  Route::post('/by_key', [ProductTypeController::class, 'get_by_key']);
+});
 Route::prefix('product')->group(function() {
   Route::post('/create', [ProductController::class, 'create_product'])->middleware('checkAdmin');
   Route::post('/update', [ProductController::class, 'update_product'])->middleware('checkAdmin');
   Route::post('/delete', [ProductController::class, 'delete_product'])->middleware('checkAdmin');
   Route::get('/all', [ProductController::class, 'index']);
   Route::post('/get_by_id', [ProductController::class, 'get_by_id']);
+  Route::post('/get_by_type_id', [ProductController::class, 'get_by_type_id']);
 });
 Route::prefix('variation')->group(function() {
   Route::post('/create', [VariationController::class, 'create_variation'])->middleware('checkAdmin');
